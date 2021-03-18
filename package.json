@@ -1,0 +1,15 @@
+{
+  "name": "@thammett/simple-store",
+  "version": "1.0.0",
+  "description": "A strongly typed state management tool",
+  "main": "dist/store.js",
+  "types": "dist/store.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "Terry Hammett",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  }
+}

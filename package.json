@@ -1,15 +1,28 @@
 {
   "name": "@thammett/simple-store",
-  "version": "1.0.0",
+  "private": false,
+  "version": "1.0.1",
   "description": "A strongly typed state management tool",
   "main": "dist/store.js",
   "types": "dist/store.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thammet/simple-store"
+  },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "mocha -r ts-node/register test/*"
   },
   "author": "Terry Hammett",
   "license": "MIT",
   "devDependencies": {
+    "@types/chai": "^4.2.15",
+    "@types/chai-spies": "^1.0.3",
+    "@types/mocha": "^8.2.1",
+    "chai": "^4.3.4",
+    "chai-spies": "^1.0.0",
+    "mocha": "^8.3.2",
+    "ts-node": "^9.1.1",
     "typescript": "^3.8.3"
   }
 }

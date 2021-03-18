@@ -6,6 +6,10 @@ export class Store<T extends {}> {
     private readonly subscriptions: StoreSubscription<T>[];
 
     constructor(readonly name: string, readonly defaultValue: T) {
+        if(name == null || name == '') {
+            throw new Error("name cannon be null");
+        }
+
         this.state = defaultValue;
         this.subscriptions = [];
     }
@@ -41,14 +45,26 @@ export class Store<T extends {}> {
 
     private unsubscribe(subscription: StoreSubscription<T>) {
         const index = this.subscriptions.indexOf(subscription);
-        this.subscriptions.splice(index, 1);
+        if(index >= 0) {
+            this.subscriptions.splice(index, 1);
+        }
     }
 
     private notify(key?: keyof T): void {
         let subscriptions = !!key ? this.subscriptions.filter(s => s.keys.length == 0 || s.keys.indexOf(key) >= 0) : this.subscriptions;
         for(const subscription of subscriptions) {
-            subscription.emit(this.state);
+            try 
+            {
+                subscription.emit(this.state);
+            }
+            catch {
+                // Do nothing - we don't want an error to stop others from being notified
+            }
         }
+    }
+
+    get numberOfSubscribers() {
+        return this.subscriptions.length;
     }
 }
 
